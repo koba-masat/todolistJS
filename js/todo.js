@@ -19,6 +19,8 @@ class TodoList {
                     '<span class="date-time">' + this.getDateTime() + '</span>' +
                     '<input type="text" class="datepicker" id="datepicker" placeholder="終了日">' +
                     '<button id="del-todo">削除</button>'+
+                    '<br><input type="file" name="edit_image" id="edit_image" class="img_upload">' +
+                    '<img src="" id="tl_img" class="img_preview">' +
                 '</li>';
     };
     
@@ -44,4 +46,13 @@ $("#input-todo-button").click(function(){
 
 $("body").on('click', '#del-todo', function(){
    $(this).parent().remove(); 
+});
+
+$('body').on('change', '#edit_image', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#tl_img").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
+    $("#edit_image").remove();
 });
